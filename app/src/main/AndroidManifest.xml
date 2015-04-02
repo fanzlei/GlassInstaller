@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.glassx.wear.installer" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <!--<activity-->
+            <!--android:name="test.MainActivity"-->
+            <!--android:label="@string/app_name"-->
+            <!--android:theme="@style/AppTheme" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
+
+        <!--用于测试-->
+        <receiver android:name="test.ActionReceiver" >
+            <intent-filter>
+                <action android:name="cn.wear.glassx.test.apkActionReceiver" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="account.sync.InstallReceiver" >
+            <intent-filter>
+                <action android:name="cn.wear.glassx.apkActionReceiver" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".BootReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!--用于测试-->
+        <service android:name="test.InstallerService" >
+            <intent-filter>
+                <action android:name="cn.glassx.installerService" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="account.sync.InstallSyncService"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/sync_install_adapter" />
+        </service>
+        <service
+            android:name=".StickService"
+            android:process=":installer.stickService"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="cn.glassx.wear.installer.stickService"/>
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>
