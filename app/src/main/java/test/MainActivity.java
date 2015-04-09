@@ -21,7 +21,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void onClick_install(View view){
-        Intent intent = new Intent("cn.wear.glassx.apkActionReceiver");
+        Intent intent = new Intent("cn.wear.glassx.test.apkActionReceiver");
         intent.putExtra("action","install");
         //intent.putExtra("apkPath", Environment.getExternalStorageDirectory().toString()+ File.separator+"notebook2.apk");
         intent.putExtra("apkPath","/sdcard/notebook2.apk");
@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onClick_uninstall(View view){
-        Intent intent = new Intent("cn.wear.glassx.apkActionReceiver");
+        Intent intent = new Intent("cn.wear.glassx.test.apkActionReceiver");
         intent.putExtra("action","unInstall");
         intent.putExtra("packageName","com.fanz.notebook2");
         sendBroadcast(intent);

@@ -30,7 +30,7 @@ public class StickService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        startService(new Intent("cn.glassx.wear.installer.stickService"));
+        startService(new Intent(this,StickService.class));
     }
 
     @Override

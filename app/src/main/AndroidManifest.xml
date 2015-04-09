@@ -37,6 +37,7 @@
         <receiver android:name=".BootReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.HOME"/>
             </intent-filter>
         </receiver>
 
@@ -61,7 +62,7 @@
         </service>
         <service
             android:name=".StickService"
-            android:process=":installer.stickService"
+            android:process="installer.stickService"
             android:enabled="true"
             android:exported="true" >
             <intent-filter>

@@ -14,7 +14,7 @@ public class ActionReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d("GlassInstaller","接收到应用安装、卸载广播");
-        Intent intent1 = new Intent("cn.glassx.installerService");
+        Intent intent1 = new Intent(context,InstallerService.class);
         intent1.putExtras(intent.getExtras());
         context.startService(intent1);
     }
