@@ -24,6 +24,12 @@ public class AppConfig {
      * 账户类型
      */
     public static final String ACCOUNT_TYPE = "cn.glassx.wear";
+    /**
+     * Auth token 类型
+     */
+    public static final String AUTHTOKEN_TYPE_FULL_ACCESS = "Full access";
+    //过期时间
+    public final static String EXPIRES_AT = "EXPIRES_AT";
     /**请求同步的AuthToken，从XAPI中获得*/
     public static String authToken = null;
 
