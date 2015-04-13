@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 
 import authenticator.TokenUtils;
 import cn.glassx.wear.account.IOauthToken;
@@ -18,41 +19,22 @@ import cn.glassx.wear.installer.AppConfig;
  */
 public class InstallReceiver extends BroadcastReceiver {
 
-    private IOauthToken oauthToken;
-    private ServiceConnection conn = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            oauthToken = IOauthToken.Stub.asInterface(service);
-        }
 
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-
-        }
-    };
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-
-                try {
-                    Intent tokenIntent = new Intent("android.accounts.AccountAIDLService");
-                    context.bindService(tokenIntent,conn,Context.BIND_AUTO_CREATE);
-                    /*通过AIDL获取的token*/
-                    AppConfig.authToken = oauthToken.getOauthToken();
                     /*自己获得token*/
                     AppConfig.authToken = TokenUtils.getAuthToken(
                             AccountManager.get(context).getAccountsByType(AppConfig.ACCOUNT_TYPE)[0],
                             context
                     );
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
+
                 if(AppConfig.authToken == null || AppConfig.authToken.isEmpty()){
                     // 网络不可以时
-
+                    Log.d("GlassInstaller","网络不可用");
                     return;
                 }
                 AccountUtils.requestSync(context,

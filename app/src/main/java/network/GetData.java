@@ -60,7 +60,9 @@ public class GetData  {
                             for(int i =0;i<ja.length();i++){
                                 JSONObject jo = ja.getJSONObject(i);
                                 APKMessage apkMessage = new APKMessage();
-                                apkMessage.setOperation(jo.getString("operation"));
+                                //apkMessage.setOperation(jo.getString("operation"));
+                                /*现在暂时只用到安装功能，不需要服务器获取操作方式*/
+                                apkMessage.setOperation(AppConfig.ACTION_INSTALL);
                                 apkMessage.setPackageName(jo.getString("packageName"));
                                 apkMessage.setRemoteURL(jo.getString("remoteURL"));
                                 apkMessage.setApkLabel(jo.getString("apkLabel"));
