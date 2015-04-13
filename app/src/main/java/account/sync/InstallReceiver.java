@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 
 import cn.glassx.wear.account.IOauthToken;
 import cn.glassx.wear.installer.AppConfig;
@@ -44,7 +45,7 @@ public class InstallReceiver extends BroadcastReceiver {
                     e.printStackTrace();
                 }
                 if(AppConfig.authToken == null || AppConfig.authToken.isEmpty()){
-                    //Todo 网络不可以时
+                    Log.d("GlassInstaller","网络不可用");
 
                     return;
                 }
